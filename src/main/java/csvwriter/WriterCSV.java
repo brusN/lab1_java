@@ -12,7 +12,11 @@ public interface WriterCSV {
         int keyValue = 0;
         for (HashMap.Entry<String, Integer> entry : mapCollection.entrySet()) {
             keyValue = entry.getValue();
-            outputFile.append(entry.getKey() + ";" + keyValue + ";" + String.format("%.2f", (double)(keyValue * 100) / countWords) + "%" + "\n");
+            outputFile.append(
+                    entry.getKey() + ";"
+                    + keyValue + ";"
+                    + String.format("%.2f", (double)(keyValue * 100) / countWords) + "%" + "\n"
+            );
         }
         outputFile.flush();
         outputFile.close();

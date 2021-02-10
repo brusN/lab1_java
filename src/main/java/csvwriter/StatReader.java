@@ -5,11 +5,11 @@ import java.util.*;
 
 public class StatReader {
     private HashMap<String, Integer> words;
-    private int wordСount;
+    private int wordCount;
 
     public StatReader() {
         words = new HashMap<>();
-        wordСount = 0;
+        wordCount = 0;
     }
 
     public HashMap<String, Integer> getMap() {
@@ -17,23 +17,23 @@ public class StatReader {
     }
 
     public int getCount() {
-        return wordСount;
+        return wordCount;
     }
 
     public void reset() {
         words.clear();
-        wordСount = 0;
+        wordCount = 0;
     }
 
     public void fillMap(FileInputStream file) {
-        wordСount = 0;
+        wordCount = 0;
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(file))) {
             String fileLine = fileReader.readLine();
             while (fileLine != null) {
-                String[] lineWords = fileLine.split(" ");
-                for (int i = 0; i < lineWords.length; ++i) {
-                    words.put(lineWords[i], words.getOrDefault(lineWords[i], 0) + 1);
-                    ++wordСount;
+                String[] lineWords = fileLine.split("([^A-Za-z0-9]+)");
+                for (String lineWord : lineWords) {
+                    words.put(lineWord, words.getOrDefault(lineWord, 0) + 1);
+                    ++wordCount;
                 }
                 fileLine = fileReader.readLine();
             }
@@ -53,5 +53,4 @@ public class StatReader {
 
         words = new LinkedHashMap<>(result);
     }
-
 }
